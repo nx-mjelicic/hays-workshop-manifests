@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana
+  namespace: grafana
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: grafana.hays.de
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service: 
+            name: grafana
+            port: 
+              number: 3000
+  tls: 
+    - 
+      hosts: 
+        - grafana.hays.de
+      secretName: hays-tls-secret
+
+--- 
